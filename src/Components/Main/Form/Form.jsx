@@ -13,6 +13,13 @@ const initialState = {
     amount: '',
     category: '',
     type: 'Income',
-    date: formatDate(new Date());
+    date: formatDate(new Date()),
 };
 
+const NewTransactionForm = () => {
+    const classes = useStyles();
+    const { addTransaction } = useContext(ExpenseTrackerContext);
+    const [formDate, setFormData] = useState(initialState);
+    const { segment } = useSpeechContext();
+    const [open, setOpen] = React.useState(false);
+}
