@@ -8,6 +8,7 @@ import formatDate from '../../../utils/formatDate';
 import { ExpenseTrackerContext } from '../../../context/context';
 import { incomeCategories, expenseCategories } from '../../../constants/categories';
 import useStyles from './styles';
+import { FlipRounded } from '@material-ui/icons';
 
 const initialState = {
     amount: '',
@@ -64,9 +65,42 @@ const NewTransactionForm = () => {
                         }
                         break;
                     case 'date':
-                        
+                        setFormData({ ...formData, date: s.value});
+                        break;
+                    default:
+                        break;
                 }
-            })
+            });
+
+            if (segment.isFinal && formData.amount && formData.category && formData.type && formData.date) {
+                createTransaction();
+            }
         }
-    })
+    }, [segment]);
+
+    const selectedCategories = formData.type === 'Income' ? incomeCategories : expenseCategories;
+
+    return (
+        <Grid container spacing = {2}>
+            <Snackbar open={open} setOpen={setOpen} />
+            <Grid item xs ={12}>
+                <Typography align="center" variant="subtitle2" gutterBottom>
+                    {segment ? (
+                        <div className="segment">
+                            {segment.words.map((w) => w.value).join(" ")}
+                        </div>
+                    ) : null}
+                </Typography>
+            </Grid>
+            <Grid item xs={6}>
+                <FormControl fullWidth>
+                    <InputLabel1>Type</InputLabel1>
+                    <Select value={formatDate.type} onChange={(e) => setFormData({ ...formData, type: e.target.value })}>
+                        <MenuItem value="Income">Income</MenuItem>
+                        <MenuItem value="Expense">Expense</MenuItem>
+                    </Select>
+                </FormControl>
+            </Grid>
+        </Grid>
+    )
 }
