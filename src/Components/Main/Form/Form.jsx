@@ -22,4 +22,20 @@ const NewTransactionForm = () => {
     const [formDate, setFormData] = useState(initialState);
     const { segment } = useSpeechContext();
     const [open, setOpen] = React.useState(false);
+
+    const createTransaction = () => {
+        if (Number.isNaN(Number(formData.amount)) || !formData.date.includes('-')) return;
+
+        if (incomeCategories.map((iC) => iC.type).includes(formData.category)) {
+            setFormData({...formData, type: 'Income' });
+        } else if (expenseCategories.map((iC) => iC.type).includes(formData.category)) {
+            setFormData({...formData, type: 'Expense'});
+        }
+
+        setOpen(true);
+        addTransaction({ ...formData, amount: Number(formData.amount), id: uuidv4() });
+        setFormData(initialState);
+    };
+
+    useEffect
 }
