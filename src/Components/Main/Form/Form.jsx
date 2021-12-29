@@ -101,6 +101,24 @@ const NewTransactionForm = () => {
                     </Select>
                 </FormControl>
             </Grid>
+            <Grid item xs = {6}>
+                <FormControl fullwidth>
+                    <InputLabel>Category</InputLabel>
+                    <Select value={formData.category} onChange={(e) => setFormData({...formData, category: e,target.value })}>
+                        {selectedCategories.map((c) => <MenuItem key={c.type} value={c.type}>{c.type}</MenuItem>)}
+                    </Select>
+                </FormControl>
+            </Grid>
+
+            <Grid item xs={6}>
+                <TextField type="number" label="Amount" value={formData.amount} onChange={(e) => setFormData({...formData, amount: e.target.value})} fullWidth/>
+            </Grid>
+            <Grid item xs={6}>
+                <TextField fullWidth label="Date" type="date" value={formData.date} onChange={(e) => setFormData({...formData, date: formatDate(e.target.value)})}/>
+            </Grid>
+            <Button className={classes.button} variant="outlined" color="primary" fullWidth onClick={createTransaction}>Create</Button>
         </Grid>
-    )
-}
+    );
+};
+
+export default NewTransactionForm;
