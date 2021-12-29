@@ -104,7 +104,7 @@ const NewTransactionForm = () => {
             <Grid item xs = {6}>
                 <FormControl fullwidth>
                     <InputLabel>Category</InputLabel>
-                    <Select value={formData.category} onChange={(e) => setFormData({...formData, category: e,target.value })}>
+                    <Select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value })}>
                         {selectedCategories.map((c) => <MenuItem key={c.type} value={c.type}>{c.type}</MenuItem>)}
                     </Select>
                 </FormControl>
